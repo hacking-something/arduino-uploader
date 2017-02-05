@@ -1,4 +1,12 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////
+//      Hello, User                                       //
+//      Author: Angelina Ponomareva (raccoon-lina)        //
+//      Web-site to connect: https://vk.com/raccoon_lina  //
+//      Arduino Uploader - GUI wrapper for AVRDUDE        //
+//      05.02.2017                                        //
+////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +29,8 @@ namespace ArduinoUploader
             result_box.BackColor = ColorTranslator.FromHtml("#446CB3");
             panel1.BackColor = ColorTranslator.FromHtml("#446CB3");
         }
+
+        //Обработчик кнопки VIEW для открытия HEX-файла, где puthfile - полный путь к файлу
         private string pathFile;
         private void view_button_Click(object sender, EventArgs e)
         {
@@ -39,6 +49,7 @@ namespace ArduinoUploader
             modelBox.SelectedIndex = 2;
         }
 
+        // Начало работы с AVRDUDE
         private string protocol;
         private Process processStartInfo = new Process();
         private void upload_button_Click(object sender, EventArgs e)
@@ -91,6 +102,7 @@ namespace ArduinoUploader
             }
             else
             {
+                //Если все поля заполнены верно запускаем процесс работы с AVRDUDE
                 if (modelBox.Text == "atmega2560")
                     protocol = "-cstk500v2";
                 else
@@ -118,12 +130,14 @@ namespace ArduinoUploader
             
         }
 
+        //Работа с кнопкой ИНФО
+        //По нажатию кнопки - переход на новую форму ABOUT
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Form2 form = new Form2();
             form.Show();
         }
-
+ 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBox1.Image = Properties.Resources.info;
@@ -133,12 +147,16 @@ namespace ArduinoUploader
         {
             pictureBox1.Image = Properties.Resources.info_disebled;
         }
+        //Завершение работы с кнопкой ИНФО
 
+        //Обновление списка портов в Combobox
         private void timer1_Tick(object sender, EventArgs e)
         {
             comPort_DropDown(sender, e);
         }
 
+
+        //Работа с SerialPort, добавление/удаление наименований
         private string nameComPort;
 
         private void comPort_DropDown(object sender, EventArgs e)
